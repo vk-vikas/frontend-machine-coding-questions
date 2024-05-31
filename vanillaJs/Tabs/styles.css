@@ -1,0 +1,25 @@
+body {
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+.tab-content-item {
+  display: none;
+}
+
+.tab-item {
+  background-color: orange;
+}
+
+.tab-item:hover {
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.tab-content-item.active {
+  display: block;
+}
+
+.tab-item.active {
+  background-color: white;
+}
