@@ -1,0 +1,9 @@
+body {
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 20%;
+  background-color: #fffae6;
+}
