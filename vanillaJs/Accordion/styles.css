@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding: 16px;
+  font-family: sans-serif;
+}
+
+.accordion-item {
+  margin-top: 8px;
+  border: 1px solid saddlebrown;
+}
+
+.accordion-content {
+  display: none;
+  background-color: #caf4ff;
+  padding: 16px 6px;
+}
+
+li {
+  list-style-type: none;
+}
+
+.accordion-header {
+  padding: 6px;
+}
+
+.active .accordion-content {
+  display: block;
+}
+
+.active .accordion-header {
+  background-color: #a0deff;
+}
