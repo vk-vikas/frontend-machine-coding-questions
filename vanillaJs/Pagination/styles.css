@@ -1,0 +1,40 @@
+.app {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.product-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid saddlebrown;
+  padding: 8px;
+  margin-top: 6px;
+}
+
+.product-card > img {
+  width: 200px;
+}
+
+.pagination {
+  margin-top: 12px;
+  display: flex;
+  gap: 4px;
+}
+
+button {
+  background-color: #fff;
+  border-radius: 100%;
+  border: none;
+  background-color: #cbf1f5;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.selected {
+  background-color: #71c9ce;
+  color: black;
+}
