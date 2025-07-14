@@ -36,6 +36,9 @@ const Otp = ({ length, onOtpSubmit }) => {
   const handleBackspace = (e, index) => {
     // need to study this more
     // onkeyup used not onkeydown, as keydown->onchange->onkeyup is the order of execution
+    // logic for keyup: we first let backspace clear the field and then onkeyup happens after that,
+    // so then this part of focus change happens so we clear first and then move and not move before clearing 
+    
     if (e.key === "Backspace") {
       inputArrayRef.current[index - 1]?.focus();
     }
