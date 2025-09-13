@@ -16,25 +16,30 @@ const Checkboxes = ({ rootNodes, data, checked, setChecked }) => {
       const verifyChecked = (node) => {
         /* this will not work because if potato is unchecked it sees that it has no children and it
         returns false that will shortcircuit the .every() and the check will not go to the children of tomato*/
-        if (!node.children) return newState[node.id] || false;
-        const areAllChildrenChecked = node.children.every((child) =>
-          verifyChecked(child)
-        );
-        newState[node.id] = areAllChildrenChecked;
-        return areAllChildrenChecked;
-
-        /*** right way is not use every() that approach has bugs ***/
-        // if (!node.children || node.children.length === 0) {
-        //   // if no children, return the current state
-        //   return newState[node.id] || false;
-        // }
-        // // an Array as map returns us an array of booleans
-        // const areAllChildrenChecked = node.children?.map((child) =>
+        // if (!node.children) return newState[node.id] || false;
+        // const areAllChildrenChecked = node.children.every((child) =>
         //   verifyChecked(child)
         // );
-        // const areAllChecked = areAllChildrenChecked?.every(Boolean);
-        // newState[node.id] = areAllChecked;
-        // return areAllChecked;
+        // newState[node.id] = areAllChildrenChecked;
+        // return areAllChildrenChecked;
+
+        /*** right way is not use every() that approach has bugs ***/
+        // Leaf node: return its current checked state from newState
+        if (!node.children || node.children.length === 0) {
+          return newState[node.id] || false;
+        }
+
+        // Recursively check if all children are marked as checked
+        const childCheckStatuses = node.children.map((child) =>
+          updateCheckedState(child)
+        );
+
+        const isNodeChecked = childCheckStatuses.every(Boolean);
+
+        // Update the state for the current node based on its children
+        newState[node.id] = isNodeChecked;
+
+        return isNodeChecked;
       };
       rootNodes.forEach((rootNode) => {
         verifyChecked(rootNode);
