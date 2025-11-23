@@ -23,12 +23,10 @@ const Checkboxes = ({ rootNodes, data, checked, setChecked }) => {
         // newState[node.id] = areAllChildrenChecked;
         // return areAllChildrenChecked;
 
-        /*** right way is not use every() that approach has bugs ***/
         // Leaf node: return its current checked state from newState
         if (!node.children || node.children.length === 0) {
           return newState[node.id] || false;
         }
-
         // Recursively check if all children are marked as checked
         const childCheckStatuses = node.children.map((child) =>
           updateCheckedState(child)
@@ -38,7 +36,6 @@ const Checkboxes = ({ rootNodes, data, checked, setChecked }) => {
 
         // Update the state for the current node based on its children
         newState[node.id] = isNodeChecked;
-
         return isNodeChecked;
       };
       rootNodes.forEach((rootNode) => {
