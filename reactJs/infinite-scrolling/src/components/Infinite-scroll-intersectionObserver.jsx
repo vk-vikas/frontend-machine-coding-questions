@@ -13,16 +13,21 @@ const InfiniteScrollIntersectionObserver = () => {
   const PREFETCH_TRIGGER = 5;
 
   const bringData = async () => {
-    setLoading(true);
+    try{
+      setLoading(true);
 
-    const res = await fetch(
-      `https://dummyjson.com/todos?limit=${LIMIT}&skip=${SKIP}`
-    );
-    const listData = await res.json();
-    setList((prev) => [...prev, ...listData.todos]);
-    setHasMore(listData.todos.length > 0);
-
-    setLoading(false);
+      const res = await fetch(
+        `https://dummyjson.com/todos?limit=${LIMIT}&skip=${SKIP}`
+      );
+      const listData = await res.json();
+      setList((prev) => [...prev, ...listData.todos]);
+      // ensures when the data is finished i.e 0 list item from api we dont keep showing loading...
+      setHasMore(listData.todos.length > 0);
+    }catch(err){
+      console.log(err);
+    }finally{
+      setLoading(false);
+    }   
   };
 
   useEffect(() => {
@@ -38,7 +43,7 @@ const InfiniteScrollIntersectionObserver = () => {
 
       /*The Intersection Observer API allows you to configure a callback that is called when either of these circumstances occur:
 
-        - A target element intersects either the device's viewport or a specified element. That specified element is called the root element.
+        - A target element either goes away or comes into view i.e isIntersecting changes value
         - The first time the observer is initially asked to watch a target element.*/
       observerRef.current = new IntersectionObserver(
         (entries) => {
