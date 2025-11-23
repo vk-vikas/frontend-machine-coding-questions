@@ -15,6 +15,7 @@ const VirtualizedList = ({ itemCount, itemHeight, height, renderItem }) => {
   const visibleCount = Math.ceil(height / itemHeight);
   const startIndex = Math.floor(scrollTop / itemHeight);
   const endIndex = Math.min(itemCount - 1, startIndex + visibleCount + 1);
+  // overscan so fast scroll doesnt show white space, code on gpt
 
   // scroll handler — runs every time user scrolls
   // useCallback ensures same function reference across renders
@@ -25,10 +26,9 @@ const VirtualizedList = ({ itemCount, itemHeight, height, renderItem }) => {
 
   // only runs on mounts n unmounts, nothing to do with scrolling
   useEffect(() => {
-    const node = scrollRef.current;
-    if (node) {
-      node.addEventListener("scroll", handleScroll);
-      return () => node.removeEventListener("scroll", handleScroll);
+    if (scrollRef.current) {
+      scrollRef.current.addEventListener("scroll", handleScroll);
+      return () => scrollRef.current.removeEventListener("scroll", handleScroll);
     }
   }, [handleScroll]);
 
@@ -59,6 +59,7 @@ const VirtualizedList = ({ itemCount, itemHeight, height, renderItem }) => {
         border: "1px solid #ccc",
       }}
     >
+      {/* large fake container to enable scrolling */}
       <div style={{ height: `${totalHeight}px`, position: "relative" }}>
         {items}
       </div>
