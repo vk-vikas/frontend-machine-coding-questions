@@ -35,6 +35,8 @@ const Stopwatch = () => {
   }, []);
 
   const formatTime = (time) => {
+    // '/' operation converts it into the unit and 
+    // '%' removes the access larget units so it spilover to left is ignored
     const ms = Math.floor((time % 1000) / 10);
     const seconds = Math.floor((time / 1000) % 60);
     const minutes = Math.floor((time / 60000) % 60);
