@@ -9,6 +9,7 @@ const Stopwatch = () => {
 
   const tick = () => {
     setElapsedTime(Date.now() - startTimeRef.current);
+    // requestAnimationFrame = “call me again before your next repaint. 60 times in a sec”
     animationRef.current = requestAnimationFrame(tick);
   };
 
