@@ -1,0 +1,17 @@
+:root {
+  --bg: #ffffff;
+  --text: #1a1a1a;
+}
+
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #ebebeb;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: sans-serif;
+  transition: background 0.25s ease, color 0.25s ease;
+}
