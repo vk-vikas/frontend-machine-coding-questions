@@ -1,12 +1,34 @@
-# React + Vite
+# Progress Bar — Machine Coding Cheat Sheet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## State
 
-Currently, two official plugins are available:
+- `percent` → number (clamped progress value)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Props
 
-## Expanding the ESLint configuration
+- `value` → external progress input
+- `onComplete` → callback when max reached
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Core Logic
+
+- clamp value between MIN and MAX
+- update internal percent on prop change
+- trigger completion when value hits max
+
+## Handlers
+
+- none (fully driven by props)
+
+## Render
+
+- progress container
+- scaled inner bar
+- percentage label
+
+## Constraints / Rules
+
+- clamp out-of-range values
+- support completion callback
+- accessible via ARIA attributes
+
+## Revision Cue

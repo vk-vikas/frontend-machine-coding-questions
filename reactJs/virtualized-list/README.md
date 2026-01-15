@@ -1,12 +1,31 @@
-# React + Vite
+# Virtualized List — Machine Coding Cheat Sheet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## State
 
-Currently, two official plugins are available:
+- `scrollTop` → number (current scroll position)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Refs
 
-## Expanding the ESLint configuration
+- `scrollRef` → scroll container DOM ref
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Core Logic
+
+- calculate visible window using `scrollTop` + `itemHeight`
+- render only items between `startIndex` and `endIndex`
+- fake full height container to enable scrolling
+
+## Handlers
+
+- scroll listener → update `scrollTop`
+
+## Render
+
+- scrollable container
+- inner spacer with total height
+- absolutely positioned visible items
+
+## Cleanup
+
+- remove scroll listener on unmount
+
+## Revision Cue

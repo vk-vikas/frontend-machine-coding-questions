@@ -1,12 +1,33 @@
-# React + Vite
+# Star Rating — Machine Coding Cheat Sheet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## State
 
-Currently, two official plugins are available:
+- `hoveredRating` → number (UI hover feedback)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Props
 
-## Expanding the ESLint configuration
+- `rating` → selected value (controlled)
+- `size` → number of stars
+- `onChange` → emit selected rating
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Core Logic
+
+- derive star state from hover or selected rating
+- hover takes precedence over selected value
+
+## Handlers
+
+- hover in / out → update hovered rating
+- click → emit rating change
+
+## Render
+
+- map stars based on size
+- apply active / hover styles
+
+## Constraints / Rules
+
+- controlled component
+- visual feedback without mutating rating
+
+## Revision Cue
