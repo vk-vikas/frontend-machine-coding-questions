@@ -1,16 +1,32 @@
-# React + Vite
+# Multi-Select Dropdown — Machine Coding Cheat Sheet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## State
+- `isOpen` → boolean (dropdown visibility)
+- `search` → string (filter input)
+- `selected` → array (selected options)
 
-Currently, two official plugins are available:
+## Refs
+- `ref` → container ref (outside click detection)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Core Logic
+- derive options by filtering with `search`
+- toggle option in `selected` array (add / remove)
+- emit selected values via `onChange`
 
-## React Compiler
+## Handlers
+- toggle dropdown open / close
+- update search input
+- select / deselect option
+- remove selected tag
+- close on outside click
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Render
+- trigger container with selected tags / placeholder
+- conditional dropdown panel
+- search input
+- filtered option list
 
-## Expanding the ESLint configuration
+## Cleanup
+- remove document click listener on unmount
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Revision Cue
