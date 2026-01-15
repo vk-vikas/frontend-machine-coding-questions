@@ -1,12 +1,25 @@
-# React + Vite
+# Traffic Light — Machine Coding Cheat Sheet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## State
+- `activeIndex` → number (current light in sequence)
 
-Currently, two official plugins are available:
+## Refs
+- `timeoutRef` → timeout id (timer control)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Core Logic
+- sort sequence by `lightUpOrder` → timing control
+- sort sequence by `renderOrder` → layout control
+- advance `activeIndex` after `duration`
 
-## Expanding the ESLint configuration
+## Handlers
+- auto-advance using `setTimeout`
+- cycle index modulo sequence length
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Render
+- map layout sequence
+- activate light by matching current color
+
+## Cleanup
+- clear timeout on re-run / unmount
+
+## Revision Cue

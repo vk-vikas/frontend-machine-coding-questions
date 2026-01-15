@@ -1,46 +1,60 @@
-import React, { useEffect, useState } from "react";
-import Light from "./Light";
+import React, { useEffect, useState, useRef } from 'react';
+// import "./style.css";
 
-const TrafficLight = ({ data }) => {
-  const getDisplayOrder = (randomOrderConfigData) => {
-    // toSorted fn to sort the data based on displayOrder, it returns a new array unlike sort which sorts the original array
-    return randomOrderConfigData.toSorted(
-      (a, b) => a.displayOrder - b.displayOrder
-    );
-  };
+const defaultSequence = [
+  { color: 'red', duration: 3000, renderOrder: 0, lightUpOrder: 0 },
+  { color: 'yellow', duration: 1000, renderOrder: 1, lightUpOrder: 1 },
+  { color: 'green', duration: 2000, renderOrder: 2, lightUpOrder: 2 },
+];
 
-  const getLightUpOrder = (randomOrderConfigData) => {
-    return randomOrderConfigData.toSorted(
-      (a, b) => a.lightUpOrder - b.lightUpOrder
-    );
-  };
-  const a = getDisplayOrder(data);
-  const b = getLightUpOrder(data);
-  const [displayOrder, setDisplayOrder] = useState(a);
-  const [lightUpOrder, setLightUpOrder] = useState(b);
-  const [activeLightData, setActiveLightData] = useState(b[0]);
+const TrafficLight = ({ sequence = defaultSequence }) => {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const timeoutRef = useRef(null);
+
+  // Sorted for controlling light-up order
+  const lightUpSequence = [...sequence].sort(
+    (a, b) => a.lightUpOrder - b.lightUpOrder
+  );
+
+  // Sorted for layout rendering
+  const layoutSequence = [...sequence].sort(
+    (a, b) => a.renderOrder - b.renderOrder
+  );
 
   useEffect(() => {
-    setTimeout(() => {
-      // findeIndex fn to find the index of the current active light
-      const currentIndex = lightUpOrder.findIndex(
-        (l) => l.color === activeLightData.color
-      );
-      const nextIndex = currentIndex + 1;
-      const nextLightData = lightUpOrder[nextIndex] ?? lightUpOrder[0];
-      setActiveLightData(nextLightData);
-    }, [activeLightData.duration]);
-  }, [activeLightData]);
+    const { duration } = lightUpSequence[activeIndex];
+
+    timeoutRef.current = setTimeout(() => {
+      setActiveIndex((prev) => (prev + 1) % lightUpSequence.length);
+    }, duration);
+
+    return () => clearTimeout(timeoutRef.current);
+  }, [activeIndex, lightUpSequence]);
+
+  const activeColor = lightUpSequence[activeIndex].color;
 
   return (
-    <div className="traffic-light">
-      {displayOrder.map((item) => (
-        <Light
-          key={item.color}
-          color={item.color}
-          activeColor={activeLightData.color}
-        />
-      ))}
+    <div
+      style={{
+        border: '1px solid black',
+        width: 'fit-content',
+        padding: '20px',
+      }}
+    >
+      {layoutSequence.map((light, index) => {
+        const isActive = light.color === activeColor;
+        return (
+          <div
+            key={index}
+            style={{
+              backgroundColor: isActive ? light.color : '#444',
+              width: '100px',
+              height: '100px',
+              borderRadius: '100%',
+            }}
+          />
+        );
+      })}
     </div>
   );
 };
