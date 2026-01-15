@@ -1,0 +1,9 @@
+.dropdown-option {
+  padding: 6px;
+  cursor: pointer;
+}
+
+.dropdown-option:hover {
+  background-color: #f0f0f0;
+  font-size: large;
+}
