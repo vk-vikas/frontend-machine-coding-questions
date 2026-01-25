@@ -1,23 +1,40 @@
-import { useState } from "react";
-import Folder from "./components/Folder";
-import "./App.css";
-import explorer from "./data/folderData";
-import useTraverseTree from "./hooks/UseTraverseTree";
+import React from "react";
+import { useFileExplorer } from "./hooks/useFileExplorer";
+import Node from "./components/FileExplorer";
+
+const initialTree = {
+  id: "root",
+  name: "root",
+  isFolder: true,
+  children: [
+    {
+      id: 1,
+      name: "src",
+      isFolder: true,
+      children: [{ id: 2, name: "index.js", isFolder: false, children: [] }],
+    },
+    {
+      id: 3,
+      name: "package.json",
+      isFolder: false,
+      children: [],
+    },
+  ],
+};
 
 export default function App() {
-  const [explorerData, setExplorerData] = useState(explorer);
-
-  const { insertNode } = useTraverseTree();
-
-  const handleInsertNode = (folderId, item, isFolder) => {
-    // item here is the name of the folder or file
-    const finalTree = insertNode(explorerData, folderId, item, isFolder);
-    setExplorerData(finalTree);
-  };
+  const { tree, insertNode, renameNode, deleteNode } =
+    useFileExplorer(initialTree);
 
   return (
-    <div className="App">
-      <Folder handleInsertNode={handleInsertNode} explorer={explorerData} />
+    <div>
+      <h2>File Explorer</h2>
+      <Node
+        node={tree}
+        insertNode={insertNode}
+        renameNode={renameNode}
+        deleteNode={deleteNode}
+      />
     </div>
   );
 }

@@ -1,12 +1,37 @@
-# React + Vite
+# File Explorer (Tree) — Machine Coding Cheat Sheet
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## State
 
-Currently, two official plugins are available:
+- `tree` → nested object (file/folder hierarchy)
+- `expanded` → boolean (folder open/close)
+- `editing` → boolean (rename mode)
+- `name` → string (temp rename value)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Core Logic
 
-## Expanding the ESLint configuration
+- recursive tree traversal for insert / rename / delete
+- insert only into folders
+- immutable updates at every level
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Handlers
+
+- insert node (file / folder)
+- rename node
+- delete node
+- toggle folder expand
+- toggle edit mode
+
+## Render
+
+- recursive node rendering
+- folder expand / collapse
+- inline rename input
+- add / delete controls
+
+## Constraints / Rules
+
+- tree is immutable
+- recursion for all mutations
+- files cannot have children
+
+## Revision Cue
